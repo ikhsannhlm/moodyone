@@ -161,34 +161,24 @@
         <div class="row">
             <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
 			<div class="col-lg-8">
-                <div class="image-container">
-                    <img class="img-fluid" src="images/empty-folder.svg" alt="alternative">
+                <div id="previewContainer">
+                    <img src="images/empty-folder.png" style="max-width: 100%; height: auto;">
                 </div> <!-- end of image-container -->
 			</div> <!-- end of col -->
 			<div class="col-lg-4">
-                <h3>Goals Setting</h3>
+                <h3>Image Editor</h3>
 				<hr>
-                <p>The app can easily help you track your personal development evolution if you take the time to set it up.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity.</p>
-                <ul class="list-unstyled li-space-lg">
-                    <li class="media">
-                        <i class="fas fa-check"></i><div class="media-body">Splash screen panel</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-check"></i><div class="media-body">Statistics graph report</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-check"></i><div class="media-body">Events calendar layout</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-check"></i><div class="media-body">Location details screen</div>
-                    </li>
-                    <li class="media">
-                        <i class="fas fa-check"></i><div class="media-body">Onboarding steps interface</div>
-                    </li>
-                </ul>
-                <a class="btn-solid-reg mfp-close page-scroll" href="#contact">Contact Us</a> <button class="btn-outline-reg mfp-close as-button" type="button">Back</button>
+                <p>The app can easily help you edit your personal image, its easy if you take the time to set it up.</p>
+                <input  type="file" id="imageUpload" accept="image/*">
+                <h4>What you want</h4>
+                <button class="button" type="button" id="resizeButton" onclick="toggleDropdown()">Resize Image</button>
+                    <div id="resizeOptions" class="dropdown-content" style="display: none;" >
+                        <button onclick="resizeImage('1:1')">1:1 (Square)</button>
+                        <button onclick="resizeImage('16:9')">16:9 (Widescreen)</button>
+                        <button onclick="resizeImage('4:3')">4:3 (Standard)</button>
+                    </div> <button class="button" type="button" onclick="compressImage()">Compress Image</button>
+                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity, some critics will help us to improve our website.</p>
+                <button class="btn-outline-reg mfp-close as-button" type="button">Back</button>
 			</div> <!-- end of col -->
 		</div> <!-- end of row -->
     </div> <!-- end of lightbox-basic -->

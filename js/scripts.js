@@ -1,5 +1,109 @@
 /* Description: Custom JS file */
+///// Fungsi edit
+function toggleRatioOptions() {
+    const ratioOptions = document.getElementById('ratioOptions');
+    if (ratioOptions.style.display === 'none') {
+        ratioOptions.style.display = 'block';
+    } else {
+        ratioOptions.style.display = 'none';
+    }
+}
 
+document.getElementById('imageUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; height: auto;">`; // Menampilkan preview dari file yang diupload
+            document.getElementById('downloadButton').style.display = 'none'; // Sembunyikan tombol download saat gambar diganti
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+function toggleDropdown() {
+    const dropdownContent = document.getElementById('resizeOptions');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+}
+
+function resizeImage(aspectRatio) {
+    const imgElement = document.querySelector('#previewContainer img');
+    if (imgElement) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = imgElement.src;
+
+        img.onload = function() {
+            const [aspectWidth, aspectHeight] = aspectRatio.split(':').map(Number);
+            let targetWidth, targetHeight;
+            const imageRatio = img.width / img.height;
+            
+            if (imageRatio > aspectWidth / aspectHeight) {
+                targetWidth = img.height * aspectWidth / aspectHeight;
+                targetHeight = img.height;
+            } else {
+                targetWidth = img.width;
+                targetHeight = img.width * aspectHeight / aspectWidth;
+            }
+
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            const offsetX = (img.width - targetWidth) / 2;
+            const offsetY = (img.height - targetHeight) / 2;
+            ctx.drawImage(img, offsetX, offsetY, targetWidth, targetHeight, 0, 0, targetWidth, targetHeight);
+            
+            const resizedDataUrl = canvas.toDataURL(); // Tidak mengatur parameter untuk mempertahankan format asli
+            updatePreview(resizedDataUrl);
+            alert('Gambar berhasil diresize!');
+            downloadImage(resizedDataUrl); // Memanggil fungsi unduh gambar
+        };
+    }
+}
+
+
+function compressImage() {
+    const imgElement = document.querySelector('#previewContainer img');
+    if (imgElement) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = imgElement.src;
+
+        img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            
+            // Kompresi ke format PNG (lossless)
+            const compressedDataUrl = canvas.toDataURL(); // Tidak mengatur parameter untuk mempertahankan format asli
+            updatePreview(compressedDataUrl);
+
+            // Menampilkan popup bahwa gambar berhasil dikompres
+            alert('Gambar berhasil dikompres!');
+
+            // Mengunduh gambar
+            downloadImage(compressedDataUrl);
+        };
+    }
+}
+
+function updatePreview(dataUrl) {
+    const previewContainer = document.getElementById('previewContainer');
+    previewContainer.innerHTML = `<img src="${dataUrl}" style="max-width: 100%; height: auto;">`;
+}
+
+function downloadImage(dataUrl) {
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = 'processed_image.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+////////
 
 (function($) {
     "use strict"; 

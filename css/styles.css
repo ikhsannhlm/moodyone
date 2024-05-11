@@ -30,6 +30,66 @@ Colors:
 - Body text - dark gray #6b747b
 ******************************************/
 
+/* Gaya untuk tombol "Choose File" */
+input[type="file"] {
+    background-color: #6b747b; 
+    color: #ffffff; 
+    border: 1px solid #6b747b; 
+    border-radius: 32px; 
+    padding: 10px 20px; 
+    font-weight: 600; 
+    font-size: 0.875rem; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+}
+
+/* Mengubah tampilan tombol saat kursor diarahkan */
+input[type="file"]:hover {
+    background-color: transparent; 
+    color: #6b747b; 
+}
+
+/* Gaya untuk tombol Resize Image dan Compress Image */
+button {
+	background-color: #026cfe;
+	color: #ffffff;
+	border: 1px solid #026cfe;
+	border-radius: 32px;
+    padding: 10px 20px;
+	font-weight: 600;
+	font-size: 0.875rem;
+    cursor: pointer;
+	transition: all 0.2s;	
+}
+
+button:hover {
+    background-color: transparent; 
+    color: #026cfe; 
+}
+
+/* Tambahkan gaya CSS untuk dropdown */
+.dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    z-index: 1;
+}
+
+.dropdown-content button {
+    width: auto;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+	color: #026cfe;
+}
+
+.dropdown-content button:hover {
+    background-color: #ddd;
+}
+
 
 /**************************/
 /*     General Styles     */
